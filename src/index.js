@@ -17,6 +17,10 @@ router.get("/", async ctx => {
   ctx.body = { message: `Hello, ${name}!`, body };
 });
 
+router.get("/people", async ctx => {
+  ctx.body = await app.people.find().toArray();
+});
+
 app.use(router.routes()).use(router.allowedMethods());
 
 console.log(`Listening on :${APP_PORT}`);
