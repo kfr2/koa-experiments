@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "build": "npx babel src/index.js -d dist",
-    "start": "npx nodemon --exec npm run build -- dist/index.js"
+    "watch": "npx nodemon src --exec babel -w src --out-dir dist --source-maps",
+    "server": "npx nodemon dist/index.js"
   },
   "dependencies": {
     "koa": "^2.6.2",
