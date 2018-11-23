@@ -9,6 +9,8 @@ const router = new Router();
 
 app.use(BodyParser());
 
+require("./mongo")(app);
+
 router.get("/", async ctx => {
   let name = ctx.request.query.name || "World";
   let body = ctx.request.body.name || "N/A";
