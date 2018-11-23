@@ -7,7 +7,8 @@ const app = new Koa();
 const router = new Router();
 
 router.get("/", async ctx => {
-  ctx.body = { message: "Hello, world!" };
+  let name = ctx.request.query.name || "World";
+  ctx.body = { message: `Hello, ${name}!` };
 });
 
 app.use(router.routes()).use(router.allowedMethods());
