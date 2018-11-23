@@ -1,14 +1,18 @@
 const Koa = require("koa");
 const Router = require("koa-router");
+const BodyParser = require("koa-bodyparser");
 
 const APP_PORT = 8000;
 
 const app = new Koa();
 const router = new Router();
 
+app.use(BodyParser());
+
 router.get("/", async ctx => {
   let name = ctx.request.query.name || "World";
-  ctx.body = { message: `Hello, ${name}!` };
+  let body = ctx.request.body.name || "N/A";
+  ctx.body = { message: `Hello, ${name}!`, body };
 });
 
 app.use(router.routes()).use(router.allowedMethods());
