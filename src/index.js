@@ -38,6 +38,11 @@ router.put("/people/:id", async ctx => {
   });
 });
 
+router.delete("/people/:id", async ctx => {
+  let documentQuery = { _id: ObjectID(ctx.params.id) };
+  ctx.body = await app.people.deleteOne(documentQuery);
+});
+
 app.use(router.routes()).use(router.allowedMethods());
 
 console.log(`Listening on :${APP_PORT}`);
