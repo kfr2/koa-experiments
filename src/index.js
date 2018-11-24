@@ -1,6 +1,7 @@
 const Koa = require("koa");
 const Router = require("koa-router");
 const BodyParser = require("koa-bodyparser");
+const ObjectID = require("mongodb").ObjectID;
 
 const APP_PORT = 8000;
 
@@ -23,6 +24,10 @@ router.get("/people", async ctx => {
 
 router.post("/people", async ctx => {
   ctx.body = await app.people.insert(ctx.request.body);
+});
+
+router.get("/people/:id", async ctx => {
+  ctx.body = await app.people.findOne({ _id: ObjectID(ctx.params.id) });
 });
 
 app.use(router.routes()).use(router.allowedMethods());
