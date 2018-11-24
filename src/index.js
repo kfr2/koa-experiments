@@ -21,6 +21,10 @@ router.get("/people", async ctx => {
   ctx.body = await app.people.find().toArray();
 });
 
+router.post("/people", async ctx => {
+  ctx.body = await app.people.insert(ctx.request.body);
+});
+
 app.use(router.routes()).use(router.allowedMethods());
 
 console.log(`Listening on :${APP_PORT}`);
