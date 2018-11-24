@@ -30,6 +30,14 @@ router.get("/people/:id", async ctx => {
   ctx.body = await app.people.findOne({ _id: ObjectID(ctx.params.id) });
 });
 
+router.put("/people/:id", async ctx => {
+  let documentQuery = { _id: ObjectID(ctx.params.id) };
+  let valuesToUpdate = ctx.request.body;
+  ctx.body = await app.people.updateOne(documentQuery, {
+    $set: valuesToUpdate
+  });
+});
+
 app.use(router.routes()).use(router.allowedMethods());
 
 console.log(`Listening on :${APP_PORT}`);
